@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrusel de Imágenes</title>
+    <style>
+        /* Estilos CSS para el carrusel */
+        #carousel-container {
+            width: 60%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        #carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .carousel-image {
+            width: 100%;
+            flex: 0 0 auto;
+        }
+        #prev, #next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 24px;
+        }
+        #prev {
+            left: 10px;
+        }
+        #next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="carousel-container">
+        <div id="carousel">
+            <img class="carousel-image" src="https://img.freepik.com/fotos-premium/simbolo-nacional-japon-turismo-monte-fuji-punto-referencia-representativo-hermosa-montana_912113-233912.jpg" alt="Imagen 1">
+            <img class="carousel-image" src="https://img.freepik.com/foto-gratis/pintura-digital-montana-arbol-colorido-primer-plano_1340-25699.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1698710400&semt=ais" alt="Imagen 2">
+            <img class="carousel-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmBxGCxRNzbRC2Gb9u8u99l5MFasOXRRO3mmSC03v4KAry7sYjrn66nHEaaYJcyhy6hbU&usqp=CAU" alt="Imagen 3">
+            <!-- Agrega más imágenes si es necesario -->
+        </div>
+        <div id="prev">&#10094;</div>
+        <div id="next">&#10095;</div>
+    </div>
+
+    <script>
+        // JavaScript para el carrusel
+        const carousel = document.getElementById('carousel');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+
+        let imageIndex = 0;
+        const totalImages = document.querySelectorAll('.carousel-image').length;
+
+        prevButton.addEventListener('click', () => {
+            imageIndex = (imageIndex - 1 + totalImages) % totalImages;
+            updateCarouselPosition();
+        });
+
+        nextButton.addEventListener('click', () => {
+            imageIndex = (imageIndex + 1) % totalImages;
+            updateCarouselPosition();
+        });
+
+        function updateCarouselPosition() {
+            const imageWidth = document.querySelector('.carousel-image').clientWidth;
+            carousel.style.transform = `translateX(${-imageIndex * imageWidth}px)`;
+        }
+    </script>
+</body>
+</html>
